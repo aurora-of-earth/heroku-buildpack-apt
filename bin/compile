@@ -4,6 +4,10 @@
 # fail fast
 set -e
 
+sudo cd /
+mkdir aurora
+echo "mkdir aurora!"
+
 # debug
 # set -x
 
