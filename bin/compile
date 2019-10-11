@@ -66,7 +66,6 @@ APT_OPTIONS="$APT_OPTIONS -o dir::etc::sourcelist=$APT_SOURCES -o dir::etc::sour
 
 topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
-
 for PACKAGE in $(cat $BUILD_DIR/Aptfile | grep -v -s -e '^#' | grep -v -s -e "^:repo:"); do
   if [[ $PACKAGE == *deb ]]; then
     PACKAGE_NAME=$(basename $PACKAGE .deb)
@@ -112,3 +111,4 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 topic "Rewrite package-config files"
 find $BUILD_DIR/.apt -type f -ipath '*/pkgconfig/*.pc' | xargs --no-run-if-empty -n 1 sed -i -e 's!^prefix=\(.*\)$!prefix='"$BUILD_DIR"'/.apt\1!g'
+apt-get install rtorrent wget curl lftp aria2 speedtest-cli python3.7 python2.7 python3 python3.5 zip binutils bash host python3-pip psmisc dpkg coreutils ssh vsftpd sudo chroot fakeroot build-essential curl git python unzip
